@@ -19,7 +19,7 @@ void Queue::enQueue(int element)
         return;
     else
     {
-        if ( m_front == -1 )
+        if( m_front == -1 )
             m_front = 0;
         m_data[++m_rear] = element;
         ++m_size;
@@ -32,15 +32,23 @@ int Queue::deQueue()
     if( isEmpty() )
         return -1;
 
+    // First option by moving front pointer to next element. Waste space (solution circular queue) !!!
     int element{ m_data[m_front++] };
     --m_size;
+/*
+    // Second option by shifting all elements to front by one position in table (a,b,c)->(b,c). Keep space !!!
+    int element{ m_data[m_front] };
+    for( int counter{ m_front }; counter < m_rear; ++counter )
+        m_data[counter] = m_data[counter+1];
+    --m_rear;
+*/
+    std::cout << element << " dequeued from queue\n";
 
-    if( m_front >= m_rear )
+    if( m_front >= m_rear ) // Reset queue due to last element
     {
         m_front = -1;
         m_rear = -1;
     }
-    std::cout << element << " dequeued from queue\n";
 
     return element;
 }
