@@ -1,72 +1,38 @@
 #include <iostream>
 
-class Node
-{
-public:
-    int m_data{};
-    Node* next{}; 
-};
+#include "include/LinkedList.h"
 
-class LinkedList
-{
-private:
-    /* data */
-public:
-    LinkedList(/* args */);
-    ~LinkedList();
-};
-
-LinkedList::LinkedList(/* args */)
-{
-}
-
-LinkedList::~LinkedList()
-{
-}
-
-void printList(const Node* node)
-{
-    while( node != nullptr )
-    {
-        std::cout << node->m_data << '\t';
-        node = node->next;
-    }
-    std::cout << '\n';
-}
-
-void insertList(Node* afterNode, Node* insertNode)
-{
-    insertNode->next = afterNode->next;
-    afterNode->next = insertNode;
-}
 
 int main()
 {
-    Node* head;
-    Node* one = nullptr;
-    Node* two = nullptr;
-    Node* three = nullptr;
+    LinkedList l1;
+    l1.push_front(23);
+    l1.push_front(8);
+    l1.push_front(10);
+    l1.push_front(100);
+    l1.print();
 
-    one = new Node();
-    two = new Node();
-    three = new Node();
+    LinkedList l2;
+    l2.push_back(23);
+    l2.push_back(8);
+    l2.push_back(10);
+    l2.push_back(100);
+    l2.print();
 
-    one->next = two;
-    two->next = three;
-    three->next = nullptr;
-    
-    one->m_data = 1;
-    two->m_data = 2;
-    three->m_data = 3;
-
-    head = one;
-    printList(head);
-
-    Node* four = new Node();
-    // Insert four after three
-    four->m_data = 4;
-    insertList(three, four);
-    printList(head);
+    LinkedList l3;
+    l3.push_back(100);
+    l3.push_front(10);
+    l3.push_front(8);
+    l3.push_back(23);
+    l3.push_front(180);
+    l3.push_after(180, 345);
+    l3.push_after(8,128);
+    l3.print();
+    l3.push_after(0, 125);
+    l3.push_back(190);
+    l3.push_after(190, 67);
+    l3.print();
+    std::cout << "Size linked list is: " << l3.size() << '\n';
 
     return 0;
 }
